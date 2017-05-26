@@ -152,7 +152,7 @@ class CityFactory extends CityMethod {
 
         foreach($regiones as $k => $r) {
 
-            $cities = $this->region[$r];
+            $cities = $this->region[$r]; 
 
             foreach($cities as $cty) {
 
@@ -243,8 +243,8 @@ class CityFactory extends CityMethod {
         foreach($this->cities as $city) {
             if ($city->get('x') > 0 && $city->get('y') > 0) $this->region('NE', $city);
             if ($city->get('x') > 0 && $city->get('y') < 0) $this->region('SE', $city);
-            if ($city->get('x') < 0 && $city->get('y') > 0) $this->region('SW', $city);
-            if ($city->get('x') < 0 && $city->get('y') < 0) $this->region('NW', $city);
+            if ($city->get('x') < 0 && $city->get('y') > 0) $this->region('NW', $city);
+            if ($city->get('x') < 0 && $city->get('y') < 0) $this->region('SW', $city);
         }
 
     }
