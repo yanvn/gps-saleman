@@ -62,12 +62,21 @@ class CityFactory extends CityMethod {
     var $cities = [];
     var $score  = 0;
     var $region = [];
+
     var $sort   = array(
         ['NE', 'NW', 'SW', 'SE'],
         ['NW', 'SW', 'SE', 'NE'],
         ['SW', 'NW', 'NE', 'SE'],
         ['SE', 'NE', 'NW', 'SW'],
     );
+
+    var $area   = array(
+        'NE' => ['NE', 'NW'],
+        'NW' => ['NW', 'SW'],
+        'SW' => ['SW', 'NW'],
+        'SE' => ['SE', 'NE']
+    );
+
     var $result = [];
     var $search = '';
 
@@ -139,7 +148,7 @@ class CityFactory extends CityMethod {
      * @date   2017-05-26T13:29:38+070
      * @return [type]                  [description]
      */
-    public function traceRoute() {
+    public function traceRoute($debug = fase) {
 
         $this->trace = [];
         $this->score = 0;
@@ -156,7 +165,12 @@ class CityFactory extends CityMethod {
 
         foreach($regiones as $k => $r) {
 
-            $cities = $this->region[$r];
+            $cities = [];
+            $area   = $this->area[$r];
+
+            foreach($area as $a) {
+                $cities = empty($cities) ? $this->region[$a] : array_merge($cities, $this->region[$a]);
+            }
 
             foreach($cities as $cty) {
 
@@ -182,7 +196,7 @@ class CityFactory extends CityMethod {
 
                 }
 
-                if ($i == count($cities)) continue;
+                if (empty($trace)) continue;
 
                 asort($trace);
 
@@ -273,18 +287,10 @@ $cities = $CityMethod->cities;
 
 foreach($cities as $city) {
     $result = $CityMethod->find($city->name)->traceRoute();
-    $score[$result->score] = $city->name;
+    $score[$city->name] = $result->score;
 }
 
-ksort($score);
-
-$finalCity      = array_shift($score);
-$finalResult    = $CityMethod->find($finalCity)->traceRoute();
+$finalCity      = key($score); 
+$finalResult    = $CityMethod->find($finalCity)->traceRoute(true);
 
 $CityMethod->out();
-
-
-
-
-
-//$cities->out($result->data);
