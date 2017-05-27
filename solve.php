@@ -60,6 +60,7 @@ class CityFactory extends CityMethod {
 
     var $source = null;
     var $cities = [];
+    var $score  = 0;
     var $region = [];
     var $sort   = array(
         ['NE', 'NW', 'SW', 'SE'],
@@ -140,6 +141,9 @@ class CityFactory extends CityMethod {
      */
     public function traceRoute() {
 
+        $this->trace = [];
+        $this->score = 0;
+
         if (empty($city)) {
             $city = $this->find($this->search, 'city');
             $this->trace[] = $city;
@@ -152,7 +156,7 @@ class CityFactory extends CityMethod {
 
         foreach($regiones as $k => $r) {
 
-            $cities = $this->region[$r]; 
+            $cities = $this->region[$r];
 
             foreach($cities as $cty) {
 
@@ -187,6 +191,7 @@ class CityFactory extends CityMethod {
                     else {
                         $city = $this->find($search, 'city');
                         $this->trace[] = $city;
+                        $this->score += $bc;
                         break;
                     }
                 }
@@ -195,7 +200,9 @@ class CityFactory extends CityMethod {
 
         }
 
-        return $this->trace;
+        $this->data = $this->trace;
+
+        return $this;
     }
 
     /**
@@ -219,10 +226,10 @@ class CityFactory extends CityMethod {
      * @date   2017-05-26T13:29:54+070
      * @return [type]                  [description]
      */
-    public function out($result) {
+    public function out() {
         echo '<pre>';
-        if ($result) {
-            foreach($result as $city) {
+        if ($this->data) {
+            foreach($this->data as $city) {
                 echo $city->name.'<br>';
             }
         }
@@ -257,11 +264,27 @@ function test($context) {
 }
 
 
-$cities = new CityFactory;
+$CityMethod = new CityFactory;
 
-$cities->createCity('cities.txt');
-$cities->sort();
+$CityMethod->createCity('cities.txt');
+$CityMethod->sort();
 
-$result = $cities->find('Beijing')->traceRoute();
+$cities = $CityMethod->cities;
 
-$cities->out($result);
+foreach($cities as $city) {
+    $result = $CityMethod->find($city->name)->traceRoute();
+    $score[$result->score] = $city->name;
+}
+
+ksort($score);
+
+$finalCity      = array_shift($score);
+$finalResult    = $CityMethod->find($finalCity)->traceRoute();
+
+$CityMethod->out();
+
+
+
+
+
+//$cities->out($result->data);
