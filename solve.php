@@ -22,7 +22,7 @@ class City implements Point {
     /**
      * [__construct description]
      * @author vothaianh
-     * @date   2017-05-26T12:57:09+070
+     * @date   2017-05-27T15:19:10+070
      * @param  [type]                  $args [description]
      */
     function __construct($args) {
@@ -35,8 +35,8 @@ class City implements Point {
     /**
      * [add description]
      * @author vothaianh
-     * @date   2017-05-26T13:23:43+070
-     * @param  [type]                  $param [description]
+     * @date   2017-05-27T15:19:14+070
+     * @param  array                   $args [description]
      */
     public function add($args = []) {
         foreach($args as $key => $value) {
@@ -45,10 +45,11 @@ class City implements Point {
     }
 
     /**
-     * [getTitle description]
+     * [get description]
      * @author vothaianh
-     * @date   2017-05-26T13:02:21+070
-     * @return [type]                  [description]
+     * @date   2017-05-27T15:19:18+070
+     * @param  [type]                  $title [description]
+     * @return [type]                         [description]
      */
     public function get($title) {
         return $this->$title;
@@ -82,10 +83,9 @@ class CityFactory extends CityMethod {
     /**
      * [createCity description]
      * @author vothaianh
-     * @date   2017-05-26T12:47:01+070
-     * @param  [type]                  $name     [description]
-     * @param  [type]                  $position [description]
-     * @return [type]                            [description]
+     * @date   2017-05-27T15:19:24+070
+     * @param  [type]                  $param [description]
+     * @return [type]                         [description]
      */
     function createCity($param) {
 
@@ -114,7 +114,7 @@ class CityFactory extends CityMethod {
     /**
      * [region description]
      * @author vothaianh
-     * @date   2017-05-26T13:20:00+070
+     * @date   2017-05-27T15:19:29+070
      * @param  [type]                  $region [description]
      * @param  [type]                  $city   [description]
      * @return [type]                          [description]
@@ -127,9 +127,10 @@ class CityFactory extends CityMethod {
     /**
      * [find description]
      * @author vothaianh
-     * @date   2017-05-26T13:28:37+070
-     * @param  [type]                  $name [description]
-     * @return [type]                        [description]
+     * @date   2017-05-27T15:19:33+070
+     * @param  [type]                  $name   [description]
+     * @param  [type]                  $option [description]
+     * @return [type]                          [description]
      */
     public function find($name, $option = null) {
 
@@ -146,8 +147,9 @@ class CityFactory extends CityMethod {
     /**
      * [traceRoute description]
      * @author vothaianh
-     * @date   2017-05-26T13:29:38+070
-     * @return [type]                  [description]
+     * @date   2017-05-27T15:19:39+070
+     * @param  [type]                  $debug [description]
+     * @return [type]                         [description]
      */
     public function traceRoute($debug = fase) {
 
@@ -223,7 +225,7 @@ class CityFactory extends CityMethod {
     /**
      * [findRoute description]
      * @author vothaianh
-     * @date   2017-05-26T23:18:19+070
+     * @date   2017-05-27T15:19:45+070
      * @param  [type]                  $search [description]
      * @return [type]                          [description]
      */
@@ -238,7 +240,7 @@ class CityFactory extends CityMethod {
     /**
      * [out description]
      * @author vothaianh
-     * @date   2017-05-26T13:29:54+070
+     * @date   2017-05-27T15:19:49+070
      * @return [type]                  [description]
      */
     public function out() {
@@ -257,8 +259,8 @@ class CityFactory extends CityMethod {
     /**
      * [sort description]
      * @author vothaianh
-     * @date   2017-05-26T13:07:06+070
-     * @param  array                   $args [description]
+     * @date   2017-05-27T15:19:54+070
+     * @param  [type]                  $args [description]
      * @return [type]                        [description]
      */
     public function sort($args = null) {
@@ -273,6 +275,13 @@ class CityFactory extends CityMethod {
     }
 }
 
+/**
+ * [test description]
+ * @author vothaianh
+ * @date   2017-05-27T15:19:58+070
+ * @param  [type]                  $context [description]
+ * @return [type]                           [description]
+ */
 function test($context) {
     print '<pre>';
     print_r($context);
