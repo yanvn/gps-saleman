@@ -1,5 +1,6 @@
 <?php
 
+define('DEBUG', true);
 
 interface Point {
     public function add($param);
@@ -97,7 +98,7 @@ class CityFactory extends CityMethod {
             $this->source = $source;
 
             foreach($source as $row) {
-                if (!empty($row)) {
+                if (!empty(trim($row))) {
                     $i++;
                     preg_match('/([\p{L}\s]+)\s+([\-0-9.]+)\s+([\-0-9.]+)|/u', $row, $output);
                     list ($matched, $name, $y, $x) = $output;
@@ -107,6 +108,8 @@ class CityFactory extends CityMethod {
             }
 
         }
+
+        return true;
 
     }
 
@@ -241,6 +244,7 @@ class CityFactory extends CityMethod {
      * @return [type]                  [description]
      */
     public function out() {
+        if (DEBUG === true) return;
         echo '<pre>';
         if ($this->data) {
             foreach($this->data as $city) {
@@ -290,7 +294,7 @@ foreach($cities as $city) {
     $score[$city->name] = $result->score;
 }
 
-$finalCity      = key($score); 
+$finalCity      = key($score);
 $finalResult    = $CityMethod->find($finalCity)->traceRoute(true);
 
 $CityMethod->out();
