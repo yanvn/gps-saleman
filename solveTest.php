@@ -1,5 +1,6 @@
 <?php
 
+define('DEBUG', true);
 define('CITIES_FILENAME', 'cities.txt');
 
 require_once('solve.php');

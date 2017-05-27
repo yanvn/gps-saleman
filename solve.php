@@ -1,7 +1,5 @@
 <?php
 
-define('DEBUG', true);
-
 interface Point {
     public function add($param);
     public function get($title);
