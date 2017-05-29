@@ -180,8 +180,7 @@ class CityFactory extends CityMethod {
 
                 foreach($cities as $cty) {
                     if ($this->findRoute($cty->name)) continue;
-                    $long = ($cty->get('x') - $city->get('x')) + ($cty->get('y') - $city->get('y'));
-
+            
                     $x1 = $city->get('x');
                     $x2 = $cty->get('x');
 
