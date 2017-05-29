@@ -97,7 +97,6 @@ class CityFactory extends CityMethod {
 
             foreach($source as $row) {
                 if (!empty(trim($row))) {
-                    $i++;
                     preg_match('/([\p{L}\s]+)\s+([\-0-9.]+)\s+([\-0-9.]+)|/u', $row, $output);
                     list ($matched, $name, $y, $x) = $output;
                     $city = new City(compact('name', 'x', 'y'));
@@ -177,8 +176,6 @@ class CityFactory extends CityMethod {
 
             foreach($cities as $cty) {
 
-                $i++;
-
                 $trace  = null;
 
                 foreach($cities as $cty) {
@@ -245,10 +242,9 @@ class CityFactory extends CityMethod {
      */
     public function out() {
         if (DEBUG === true) return;
-        echo '<pre>';
         if ($this->data) {
             foreach($this->data as $city) {
-                echo $city->name.'<br>';
+                echo $city->name."\n";
             }
         }
         else
